@@ -8,6 +8,8 @@
 #include <sys/wait.h>
 #include <string.h>
 
+extern char **environ;
+
 void execute_command(char *command);
 void prompt(void);
 
@@ -16,6 +18,8 @@ void free_arguments(char **arguments);
 
 char *get_command_path(char *command);
 char *create_command_path(char *command, char *directory);
+
+void execute_builtin_command(char *command);
 
 
 #endif
