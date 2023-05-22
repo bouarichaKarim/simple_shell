@@ -8,7 +8,7 @@ int main(void)
 
 	while (1)
 	{
-		printf("#cisfun$ ");
+		prompt();
 		characters = getline(&command, &bufsize, stdin);
 
 		if (characters == -1)
