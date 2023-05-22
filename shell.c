@@ -1,5 +1,10 @@
 #include "shell.h"
 
+/**
+ * main - Entry point for the shell program.
+ * Return: Always 0.
+ */
+
 int main(void)
 {
 	char *command = NULL;
@@ -26,6 +31,13 @@ int main(void)
 	free(command);
 	return (0);
 }
+
+/**
+ * execute_command - execute command, and handles both
+ * regular commands and comments.
+ * @command: param command line.
+ * Return: no return.
+ */
 
 void execute_command(char *command)
 {
