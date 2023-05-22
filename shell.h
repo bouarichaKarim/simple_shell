@@ -10,4 +10,8 @@
 void execute_command(char *command);
 void prompt(void);
 
+char **parse_arguments(char *line);
+void free_arguments(char **arguments);
+
+
 #endif
