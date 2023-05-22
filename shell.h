@@ -14,5 +14,8 @@ void prompt(void);
 char **parse_arguments(char *line);
 void free_arguments(char **arguments);
 
+char *get_command_path(char *command);
+char *create_command_path(char *command, char *directory);
+
 
 #endif
