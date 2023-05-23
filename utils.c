@@ -40,7 +40,8 @@ void execute_shell_command(char *command)
 }
 
 /**
- * execute_command - execute command and handle both regular commands and comments.
+ * execute_command - execute command and handle both 
+ * regular commands and comments.
  * @command: command line.
  * Return: no return.
  */
