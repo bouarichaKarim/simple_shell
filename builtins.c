@@ -14,6 +14,24 @@ void execute_builtin_command(char *command)
 	{
 		exit(0);
 	}
+	else if (strncmp(command, "exit ", 5) == 0)
+	{
+                char *status_arg = command + 5;
+                int status = 0;
+		
+                while (*status_arg != '\0')
+                {
+                        if (!isdigit(*status_arg))
+                        {
+                                printf("Invalid status argument: %s\n", status_arg);
+                                return;
+                        }
+                        status = (status * 10) + (*status_arg - '0');
+                        status_arg++;
+                }
+
+                exit(status);
+        }
 	else if (strcmp(command, "env") == 0)
 	{
 		extern char **environ;
