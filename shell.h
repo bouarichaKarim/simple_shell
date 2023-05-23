@@ -8,7 +8,7 @@
 #include <sys/wait.h>
 #include <string.h>
 
-
+extern char **environ;
 
 void execute_command(char *command);
 void prompt(void);
