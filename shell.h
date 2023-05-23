@@ -12,6 +12,8 @@
 extern char **environ;
 
 void execute_command(char *command);
+void execute_exit_command(char *command);
+void execute_shell_command(char *command);
 void prompt(void);
 
 char **parse_arguments(char *line);
