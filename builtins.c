@@ -16,11 +16,16 @@ void execute_builtin_command(char *command)
 	}
 	else if (strcmp(command, "env") == 0)
 	{
-		int i;
+		extern char **environ;
 
-                for ( i = 0; environ[i] != NULL; i++)
+                int i = 0;
+                char *env_var = environ[i];
+
+                while (env_var != NULL)
                 {
-                        printf("%s\n", environ[i]);
+                        printf("%s\n", env_var);
+                        i++;
+                        env_var = environ[i];
                 }
 	}
 }
