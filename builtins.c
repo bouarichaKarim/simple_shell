@@ -14,11 +14,13 @@ void execute_builtin_command(char *command)
 	{
 		exit(0);
 	}
+	
 	else if (strncmp(command, "exit ", 5) == 0)
-	{
+        {
+                // Extract the status argument after "exit "
                 char *status_arg = command + 5;
-                int status = 0;
-		
+
+                // Check if the status argument is a valid integer
                 while (*status_arg != '\0')
                 {
                         if (!isdigit(*status_arg))
@@ -26,12 +28,13 @@ void execute_builtin_command(char *command)
                                 printf("Invalid status argument: %s\n", status_arg);
                                 return;
                         }
-                        status = (status * 10) + (*status_arg - '0');
                         status_arg++;
                 }
 
+                int status = atoi(command + 5);
                 exit(status);
         }
+	
 	else if (strcmp(command, "env") == 0)
 	{
 		extern char **environ;
