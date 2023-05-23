@@ -41,17 +41,7 @@ int main(void)
 
 void execute_command(char *command)
 {
-	pid_t pid;
-	int status;
-
-	if (strcmp(command, "exit") == 0)
-        {
-                exit(0);
-        }
-	
-	else 
-	{
-		pid = fork();
+	pid = fork();
 	if (pid == -1)
 	{
 		perror("Error forking");
@@ -75,6 +65,5 @@ void execute_command(char *command)
 		{
 			printf("%s: command not found\n", command);
 		}
-	}
 	}
 }
