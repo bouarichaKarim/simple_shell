@@ -41,8 +41,20 @@ int main(void)
 
 void execute_command(char *command)
 {
-	if (strcmp(command, "exit") == 0)
+	if (strncmp(command, "exit", 4) == 0)
     {
+        char *status_arg = command + 4;
+		
+        while (*status_arg != '\0')
+        {
+            if (!isspace(*status_arg))
+            {
+                int status = atoi(status_arg);
+		    
+                exit(status);
+            }
+            status_arg++;
+        }
         exit(0);
     }
     else
@@ -70,7 +82,7 @@ void execute_command(char *command)
         else
         {
             wait(&status);
-	if (status != 0)
+            if (status != 0)
             {
                 printf("%s: command not found\n", command);
             }
