@@ -67,6 +67,11 @@ void execute_command(char *command)
                 exit(EXIT_FAILURE);
             }
         }
-       
+        else
+        {
+            wait(&status);
+            exit(0);
+		printf("%s",status);
+        }
     }
 }
