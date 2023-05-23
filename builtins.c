@@ -17,10 +17,9 @@ void execute_builtin_command(char *command)
 	
 	else if (strncmp(command, "exit ", 5) == 0)
         {
-                // Extract the status argument after "exit "
                 char *status_arg = command + 5;
+		int status;
 
-                // Check if the status argument is a valid integer
                 while (*status_arg != '\0')
                 {
                         if (!isdigit(*status_arg))
@@ -31,7 +30,7 @@ void execute_builtin_command(char *command)
                         status_arg++;
                 }
 
-                int status = atoi(command + 5);
+                status = atoi(command + 5);
                 exit(status);
         }
 	
