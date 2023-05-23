@@ -67,13 +67,6 @@ void execute_command(char *command)
                 exit(EXIT_FAILURE);
             }
         }
-        else
-        {
-            wait(&status);
-            if (status != 0)
-            {
-                printf("%s: command not found\n", command);
-            }
-        }
+       
     }
 }
