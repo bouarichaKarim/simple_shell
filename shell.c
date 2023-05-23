@@ -70,8 +70,7 @@ void execute_command(char *command)
         else
         {
             wait(&status);
-            exit(0);
-		printf("%i",status);
+		
         }
     }
 }
