@@ -16,7 +16,6 @@ void execute_builtin_command(char *command)
 	}
 	else if (strcmp(command, "env") == 0)
 	{
-		 extern char **environ;
 		int i;
 
                 for ( i = 0; environ[i] != NULL; i++)
