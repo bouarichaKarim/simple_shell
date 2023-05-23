@@ -71,7 +71,7 @@ void execute_command(char *command)
         {
             wait(&status);
             exit(0);
-		printf("%s",status);
+		printf("%i",status);
         }
     }
 }
