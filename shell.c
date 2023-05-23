@@ -41,29 +41,39 @@ int main(void)
 
 void execute_command(char *command)
 {
-	pid = fork();
-	if (pid == -1)
-	{
-		perror("Error forking");
-		exit(EXIT_FAILURE);
-	}
-	else if (pid == 0)
-	{
-		char *argv[] = {"/bin/sh", "-c", NULL, NULL};
+	if (strcmp(command, "exit") == 0)
+    {
+        exit(0);
+    }
+    else
+    {
+        pid_t pid;
+        int status;
 
-		argv[2] = command;
-		if (execve(argv[0], argv, NULL) == -1)
-		{
-			perror("Error executing command");
-			exit(EXIT_FAILURE);
-		}
-	}
-	else
-	{
-		wait(&status);
-		if (status != 0)
-		{
-			printf("%s: command not found\n", command);
-		}
-	}
+        pid = fork();
+        if (pid == -1)
+        {
+            perror("Error forking");
+            exit(EXIT_FAILURE);
+        }
+        else if (pid == 0)
+        {
+            char *argv[] = {"/bin/sh", "-c", NULL, NULL};
+
+            argv[2] = command;
+            if (execve(argv[0], argv, NULL) == -1)
+            {
+                perror("Error executing command");
+                exit(EXIT_FAILURE);
+            }
+        }
+        else
+        {
+            wait(&status);
+            if (status != 0)
+            {
+                printf("%s: command not found\n", command);
+            }
+        }
+    }
 }
