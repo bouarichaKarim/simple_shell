@@ -18,7 +18,7 @@ void execute_builtin_command(char *command)
 	{
 		extern char **env ;
 		
-		**env = environ;
+		env = environ;
 
 		while (*env)
 		{
