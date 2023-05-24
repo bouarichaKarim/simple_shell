@@ -6,7 +6,6 @@
  * @argv: Array of command-line arguments.
  * Return: Always 0.
  */
-
 int main(__attribute__((unused)) int argc, char *argv[])
 {
     char *command;
@@ -17,21 +16,31 @@ int main(__attribute__((unused)) int argc, char *argv[])
     char *program_name = argv[0];
     prctl(PR_SET_NAME, (unsigned long)program_name, 0, 0, 0);
 
-    while (1)
-    {
-        prompt();
-        characters = getline(&command, &bufsize, stdin);
-
-        if (characters == -1)
+    if (isatty(STDIN_FILENO)) {
+        while (1)
         {
-            printf("\n");
-            break;
+            prompt();
+            characters = getline(&command, &bufsize, stdin);
+
+            if (characters == -1)
+            {
+                printf("\n");
+                break;
+            }
+
+            if (characters > 0 && command[characters - 1] == '\n')
+                command[characters - 1] = '\0';
+
+            execute_command(command);
         }
+    } else {
+        while ((characters = getline(&command, &bufsize, stdin)) != -1)
+        {
+            if (characters > 0 && command[characters - 1] == '\n')
+                command[characters - 1] = '\0';
 
-        if (characters > 0 && command[characters - 1] == '\n')
-            command[characters - 1] = '\0';
-
-        execute_command(command);
+            execute_command(command);
+        }
     }
 
     free(command);

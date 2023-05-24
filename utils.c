@@ -82,6 +82,11 @@ void execute_command(char *command)
         }
         else if (pid == 0)
         {
+            /* Remove newline character from the command */
+            size_t command_len = strlen(command);
+            if (command[command_len - 1] == '\n')
+                command[command_len - 1] = '\0';
+
             execute_shell_command(command);
         }
         else

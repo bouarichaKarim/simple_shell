@@ -5,7 +5,6 @@
  * @command: param command.
  * Return: return string and NULL if not found.
  */
-
 char *get_command_path(char *command)
 {
     char *path_env;
@@ -49,25 +48,23 @@ char *get_command_path(char *command)
 /**
  * create_command_path - takes command name and search
  * for it in the directories specified by the path.
- * @command: commande name.
+ * @command: command name.
  * @directory: the directory path.
  * Return: returns string full path of the command.
  */
-
-
 char *create_command_path(char *command, char *directory)
 {
-	int command_len = strlen(command);
-	int dir_len = strlen(directory);
-	int path_len = command_len + dir_len + 2;
-	char *command_path = malloc(path_len * sizeof(char));
+    int command_len = strlen(command);
+    int dir_len = strlen(directory);
+    int path_len = command_len + dir_len + 2;
+    char *command_path = malloc(path_len * sizeof(char));
 
-	if (command_path == NULL)
-	{
-		fprintf(stderr, "Memory allocation error\n");
-		return (NULL);
-	}
+    if (command_path == NULL)
+    {
+        fprintf(stderr, "Memory allocation error\n");
+        return NULL;
+    }
 
-	snprintf(command_path, path_len, "%s/%s", directory, command);
-	return (command_path);
+    snprintf(command_path, path_len, "%s/%s", directory, command);
+    return command_path;
 }

@@ -34,6 +34,7 @@ char **parse_arguments(char *line)
 
     return arguments;
 }
+
 /**
  * free_arguments - frees the memory allocated for
  * the array of arguments.
@@ -42,13 +43,13 @@ char **parse_arguments(char *line)
  */
 void free_arguments(char **arguments)
 {
-	int i = 0;
+    int i = 0;
 
-	while (arguments[i] != NULL)
-	{
-		free(arguments[i]);
-		i++;
-	}
+    while (arguments[i] != NULL)
+    {
+        free(arguments[i]);
+        i++;
+    }
 
-	free(arguments);
+    free(arguments);
 }
