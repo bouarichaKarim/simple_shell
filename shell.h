@@ -11,6 +11,7 @@
 
 extern char **environ;
 extern char *progname;
+extern int lineno;
 void execute_command(char *command);
 void prompt(void);
 

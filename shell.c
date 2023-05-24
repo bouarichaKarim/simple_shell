@@ -6,7 +6,7 @@
  */
 
 char* progname = "hsh";
-
+int lineno = 0;
 int main(int argc, char *argv[])
 {
 	char *command = NULL;
@@ -20,6 +20,7 @@ int main(int argc, char *argv[])
 	{
 		prompt();
 		characters = getline(&command, &bufsize, stdin);
+		lineno++;
 
 		if (characters == -1)
 		{

@@ -55,7 +55,7 @@ void execute_shell_command(char *command)
 		{
 			if (WEXITSTATUS(status) == 127)
 			{
-			  fprintf(stderr,"%s: No such file or directory\n",progname);
+			  fprintf(stderr,"%s: %d: %s: not found\n",progname,lineno,command);
 			}
 		}
 	}
