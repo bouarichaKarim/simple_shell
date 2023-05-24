@@ -29,7 +29,7 @@ void execute_exit_command(char *command)
  */
 void execute_shell_command(char *command)
 {
-    char *argv[] = {"/bin/sh", "-c", NULL, NULL};
+    char *argv[] = {"./hsh", "-c", NULL, NULL};
     pid_t pid = fork();
 
     argv[2] = command;
