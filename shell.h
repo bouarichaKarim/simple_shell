@@ -21,5 +21,6 @@ void free_arguments(char **arguments);
 char *get_command_path(char *command);
 char *create_command_path(char *command, char *directory);
 char *get_program_name(void);
-
+char **tokenize_command(char *command, int *argc);
+void free_argv(char **argv);
 #endif
