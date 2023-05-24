@@ -29,16 +29,16 @@ void execute_exit_command(char *command)
  */
 void execute_shell_command(char *command)
 {
+    pid_t pid;
+    int status;
+
     char *argv[4];
     argv[0] = "./hsh";
     argv[1] = "-c";
     argv[2] = command;
     argv[3] = NULL;
-    
-    pid_t pid = fork();
 
-   
-
+    pid = fork();
     if (pid == -1)
     {
         perror("Error forking");
@@ -52,9 +52,7 @@ void execute_shell_command(char *command)
     }
     else
     {
-        int status;
-
-        waitpid(pid, &status, 0);
+        wait(&status);
 
         if (WIFEXITED(status))
         {
