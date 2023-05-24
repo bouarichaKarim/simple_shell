@@ -5,9 +5,9 @@
  * @command: command line.
  * Return: no return.
  */
-void execute_command(char *command)
+void execute_command(char *command, char *program_name)
 {
-    execute_shell_command(command, "hsh");
+    execute_shell_command(command, program_name);
 }
 
 /**
@@ -32,7 +32,7 @@ void execute_shell_command(char *command, char *program_name)
         execl("/bin/sh", "hsh", "-c", command, (char *)NULL);
 
         /* Print error message to stderr with program name */
-        fprintf(stderr, "%s: %s: command not found\n", program_name, command);
+fprintf(stderr, "%s: %s: command not found\n", program_name, command);
         exit(EXIT_FAILURE);
     }
     else
