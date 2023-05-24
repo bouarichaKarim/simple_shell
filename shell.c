@@ -5,12 +5,17 @@
  * Return: Always 0.
  */
 
-int main(void)
+char* progname = "hsh";
+
+int main(int argc, char *argv[])
 {
 	char *command = NULL;
 	size_t bufsize = 0;
 	ssize_t characters;
 
+	if(argc > 0) {
+	  progname = argv[0];
+	}
 	while (1)
 	{
 		prompt();
@@ -18,7 +23,7 @@ int main(void)
 
 		if (characters == -1)
 		{
-			printf("\n");
+			if (isatty(STDIN_FILENO)) printf("\n");
 			break;
 		}
 
@@ -27,7 +32,7 @@ int main(void)
 
 		execute_command(command);
 	}
-
+	
 	free(command);
 	return (0);
 }
