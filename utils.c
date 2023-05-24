@@ -41,8 +41,7 @@ void execute_shell_command(char *command)
     else if (pid == 0)
     {
         execl("/bin/sh", "sh", "-c", command, NULL);
-        perror("Error executing command");
-        exit(EXIT_FAILURE);
+        exit(127);
     }
     else
     {
