@@ -53,7 +53,7 @@ void execute_shell_command(char *command)
 		waitpid(pid, &status, 0);
 		if (WIFEXITED(status) && WEXITSTATUS(status) == 127)
 		{
-			fprintf(stderr, "%s: 1: %s: not found\n", argv[0], command);
+			fprintf(stderr, "%s: 1: %s: not found\n", command);
 		}
 	}
 }
