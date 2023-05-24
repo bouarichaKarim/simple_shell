@@ -1,25 +1,30 @@
 #ifndef SHELL_H
 #define SHELL_H
+
 #include <stdio.h>
-#include<sys/wait.h>
-#include <string.h>
-#include <stdlib.h>
 #include <unistd.h>
-#include <signal.h>
-typedef struct argument_exec
-{
-        char *str;
-        struct argument_exec *next;
-} argument_exec;
-char **val_of_arg(argument_exec *head);
-argument_exec *list_of_arg(char *buf, char *delim);
-void argv_free(argument_exec *head);
-void execute_shell_command(char *cmd, char **env);
-char *concatstr(char *str1, char *str2);
-int f_path(char *cmd);
-int _strlen(char *str);
-char *_getenv(const char *name, char **env);
-char *check_file_exist(char *path, char **env);
-void command_fork(char *buf, char **env);
-char *str_dup(char *str);
+#include <stdlib.h>
+#include <string.h>
+#include <sys/wait.h>
+
+extern char **environ;
+void interactive(void);
+void non_interactive(void);
+
+
+char *read_line(void);
+char **split(char *read);
+int build_excute(char **arg);
+
+int build_non_excute(char **arg);
+
+
+void path_set(char **args);
+
+
+int file_cd(char **arg);
+int file_exit(char **arg);
+int env_file(char **arg);
+int file_help(char **arg);
+
 #endif
