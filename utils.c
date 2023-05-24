@@ -41,7 +41,7 @@ void execute_shell_command(char *command)
 
     argv[2] = command;
 
-    if (execve(argv[0], argv, NULL) == -1)
+    if (execve(argv[0], argv, environ) == -1)
     {
         /* Print error message to stderr with program name */
         fprintf(stderr, "%s: Error executing command\n", argv[0]);
