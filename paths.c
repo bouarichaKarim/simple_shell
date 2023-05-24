@@ -2,7 +2,6 @@
 
 /**
  * path_set - function that finds the path of a command
- *
  * This function takes a command as input and searches for its path
  * in the system's environment variable PATH. It sets the path of the
  * command in the args array for execution.
