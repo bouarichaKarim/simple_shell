@@ -1,54 +1,78 @@
 #include "shell.h"
 
 /**
- * execute_command - execute the shell command.
+ * execute_exit_command - execute the "exit" command.
  * @command: command line.
  * Return: no return.
  */
-void execute_command(char *command, char *program_name)
+void execute_exit_command(char *command)
 {
-    execute_shell_command(command, program_name);
+	char *status_arg = command + 4;
+
+	while (*status_arg != '\0')
+	{
+		if (!isspace(*status_arg))
+		{
+			int status = atoi(status_arg);
+
+			exit(status);
+		}
+		status_arg++;
+	}
+	exit(0);
 }
 
 /**
  * execute_shell_command - execute the shell command.
  * @command: command line.
- * @program_name: name of the shell program.
  * Return: no return.
  */
-void execute_shell_command(char *command, char *program_name)
+void execute_shell_command(char *command)
 {
-    pid_t pid;
-    int status;
+	char *argv[] = {"/bin/sh", "-c", NULL, NULL};
 
-    pid = fork();
-    if (pid == -1)
-    {
-        perror("Error forking");
-        exit(EXIT_FAILURE);
-    }
-    else if (pid == 0)
-    {
-        char **argv = malloc(sizeof(char *) * 2);
-        if (argv == NULL)
-        {
-            perror("Memory allocation error");
-            exit(EXIT_FAILURE);
-        }
+	argv[2] = command;
+	if (execve(argv[0], argv, NULL) == -1)
+	{
+		perror("Error executing command");
+		exit(EXIT_FAILURE);
+	}
+}
 
-        argv[0] = command;
-        argv[1] = NULL;
+/**
+ * execute_command - execute command and handle both 
+ * regular commands and comments.
+ * @command: command line.
+ * Return: no return.
+ */
+void execute_command(char *command)
+{
+	if (strncmp(command, "exit", 4) == 0)
+	{
+		execute_exit_command(command);
+	}
+	else
+	{
+		pid_t pid;
+		int status;
 
-        /* Check if the command exists */
-        if (access(command, X_OK) == 0)
-            execve(command, argv, environ);
-
-        /* Print error message to stderr with program name */
-        fprintf(stderr, "%s: %s: command not found\n", program_name, command);
-        exit(EXIT_FAILURE);
-    }
-    else
-    {
-        waitpid(pid, &status, 0);
-    }
+		pid = fork();
+		if (pid == -1)
+		{
+			perror("Error forking");
+			exit(EXIT_FAILURE);
+		}
+		else if (pid == 0)
+		{
+			execute_shell_command(command);
+		}
+		else
+		{
+			wait(&status);
+			if (status != 0)
+			{
+				printf("%s: command not found\n", command);
+			}
+		}
+	}
 }
