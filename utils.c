@@ -51,7 +51,7 @@ void execute_shell_command(char *command)
 		{
 			if (WEXITSTATUS(status) == 127)
 			{
-				fprintf(stderr, "./hsh: 1: %s: not found\n", command);
+				fprintf(stderr, "./hsh: 1: %s: not found", command);
 			}
 		}
 	}
