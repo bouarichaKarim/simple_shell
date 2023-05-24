@@ -9,6 +9,7 @@
 #include <string.h>
 #include <ctype.h>
 #include <sys/stat.h>
+#include <sys/prctl.h>
 
 #define INITIAL_SIZE 10
 

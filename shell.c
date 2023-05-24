@@ -2,32 +2,38 @@
 
 /**
  * main - Entry point for the shell program.
+ * @argc: Number of command-line arguments.
+ * @argv: Array of command-line arguments.
  * Return: Always 0.
  */
 
-int main(void)
+int main(__attribute__((unused)) int argc, char *argv[])
 {
-	char *command = NULL;
-	size_t bufsize = 0;
-	ssize_t characters;
+    char *command;
+    size_t bufsize = 0;
+    ssize_t characters;
 
-	while (1)
-	{
-		prompt();
-		characters = getline(&command, &bufsize, stdin);
+    /* Rename the program to match argv[0] */
+    char *program_name = argv[0];
+    prctl(PR_SET_NAME, (unsigned long)program_name, 0, 0, 0);
 
-		if (characters == -1)
-		{
-			printf("\n");
-			break;
-		}
+    while (1)
+    {
+        prompt();
+        characters = getline(&command, &bufsize, stdin);
 
-		if (characters > 0 && command[characters - 1] == '\n')
-			command[characters - 1] = '\0';
+        if (characters == -1)
+        {
+            printf("\n");
+            break;
+        }
 
-		execute_command(command);
-	}
+        if (characters > 0 && command[characters - 1] == '\n')
+            command[characters - 1] = '\0';
 
-	free(command);
-	return (0);
+        execute_command(command);
+    }
+
+    free(command);
+    return 0;
 }
