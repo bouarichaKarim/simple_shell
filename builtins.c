@@ -19,7 +19,7 @@ char **val_of_arg(argument_exec *head)
 		temp = temp->next;
 		size++;
 	}
-	argv = malloc(size * sizeof(exec_arg));
+	argv = malloc(size * sizeof(argument_exec));
 	temp = head;
 	while (temp->next)
 	{
@@ -36,7 +36,7 @@ char **val_of_arg(argument_exec *head)
  *
  * Return: pointer to the head of a linked list
  */
-exec_arg *list_of_arg(char *buf)
+argument_exec *list_of_arg(char *buf)
 {
 
 	char *str = NULL;

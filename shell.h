@@ -12,7 +12,7 @@ typedef struct argument_exec
         struct argument_exec *next;
 } argument_exec;
 char **val_of_arg(argument_exec *head);
-exec_arg *list_of_arg(char *buf);
+argument_exec *list_of_arg(char *buf);
 void argv_free(argument_exec *head);
 void execute_shell_command(char *cmd, char **env);
 #endif
