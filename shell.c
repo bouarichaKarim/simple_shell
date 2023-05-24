@@ -1,36 +1,91 @@
 #include "shell.h"
 
-int main(__attribute__((unused)) int argc, char *argv[])
+/**
+ * main - Entry point for the shell program.
+ * Return: Always 0.
+ */
+
+int main(void)
 {
-    char *command;
-    size_t bufsize = 0;
-    ssize_t characters;
-    int interactive = isatty(STDIN_FILENO);
+	char *command = NULL;
+	size_t bufsize = 0;
+	ssize_t characters;
 
-    /* Rename the program to match argv[0] */
-    char *program_name = argv[0];
-    prctl(PR_SET_NAME, (unsigned long)program_name, 0, 0, 0);
+	while (1)
+	{
+		prompt();
+		characters = getline(&command, &bufsize, stdin);
 
-    while (1)
+		if (characters == -1)
+		{
+			printf("\n");
+			break;
+		}
+
+		if (characters > 0 && command[characters - 1] == '\n')
+			command[characters - 1] = '\0';
+
+		execute_command(command);
+	}
+
+	free(command);
+	return (0);
+}
+
+/**
+ * execute_command - execute command, and handles both
+ * regular commands and comments.
+ * @command: param command line.
+ * Return: no return.
+ */
+
+void execute_command(char *command)
+{
+	if (strncmp(command, "exit", 4) == 0)
     {
-        if (interactive)
-            prompt();
-
-        characters = getline(&command, &bufsize, stdin);
-
-        if (characters == -1)
+        char *status_arg = command + 4;
+		
+        while (*status_arg != '\0')
         {
-            if (interactive)
-                printf("\n");
-            break;
+            if (!isspace(*status_arg))
+            {
+                int status = atoi(status_arg);
+		    
+                exit(status);
+            }
+            status_arg++;
         }
-
-        if (characters > 0 && command[characters - 1] == '\n')
-            command[characters - 1] = '\0';
-
-        execute_command(command, program_name); /* Pass program_name as an argument */
+        exit(0);
     }
+    else
+    {
+        pid_t pid;
+        int status;
 
-    free(command);
-    return 0;
+        pid = fork();
+        if (pid == -1)
+        {
+            perror("Error forking");
+            exit(EXIT_FAILURE);
+        }
+        else if (pid == 0)
+        {
+            char *argv[] = {"/bin/sh", "-c", NULL, NULL};
+
+            argv[2] = command;
+            if (execve(argv[0], argv, NULL) == -1)
+            {
+                perror("Error executing command");
+                exit(EXIT_FAILURE);
+            }
+        }
+        else
+        {
+            wait(&status);
+            if (status != 0)
+            {
+                printf("%s: command not found\n", command);
+            }
+        }
+    }
 }
