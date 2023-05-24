@@ -29,30 +29,33 @@ void execute_exit_command(char *command)
  */
 void execute_shell_command(char *command)
 {
-char *argv[] = {"/bin/sh", "-c", NULL, NULL};
-argv[2] = command;
+	char *argv[] = {"/bin/sh", "-c", NULL, NULL};
 
-    pid_t pid = fork();
-    if (pid == -1)
-    {
-        perror("Error forking");
-        exit(EXIT_FAILURE);
-    }
-    else if (pid == 0)
-    {
-        execvp(argv[0], argv);
-        perror("Error executing command");
-        exit(EXIT_FAILURE);
-    }
-    else
-    {
-        int status;
-        waitpid(pid, &status, 0);
-        if (WIFEXITED(status) && WEXITSTATUS(status) == 127)
-        {
-            fprintf(stderr, "%s: 1: %s: not found\n", argv[0], command);
-        }
-    }
+	argv[2] = command;
+
+	pid_t pid = fork();
+
+	if (pid == -1)
+	{
+		perror("Error forking");
+		exit(EXIT_FAILURE);
+	}
+	else if (pid == 0)
+	{
+		execvp(argv[0], argv);
+		perror("Error executing command");
+		exit(EXIT_FAILURE);
+	}
+	else
+	{
+		int status;
+
+		waitpid(pid, &status, 0);
+		if (WIFEXITED(status) && WEXITSTATUS(status) == 127)
+		{
+			fprintf(stderr, "%s: 1: %s: not found\n", argv[0], command);
+		}
+	}
 }
 
 /**
