@@ -32,12 +32,6 @@ void execute_shell_command(char *command)
     pid_t pid;
     int status;
 
-    char *argv[4];
-    argv[0] = "./hsh";
-    argv[1] = "-c";
-    argv[2] = command;
-    argv[3] = NULL;
-
     pid = fork();
     if (pid == -1)
     {
@@ -46,7 +40,7 @@ void execute_shell_command(char *command)
     }
     else if (pid == 0)
     {
-        execvp(argv[0], argv);
+        execl("/bin/sh", "sh", "-c", command, NULL);
         perror("Error executing command");
         exit(EXIT_FAILURE);
     }
@@ -58,7 +52,7 @@ void execute_shell_command(char *command)
         {
             if (WEXITSTATUS(status) == 127)
             {
-                fprintf(stderr, "%s: 1: %s: not found\n", argv[0], command);
+                fprintf(stderr, "./hsh: 1: %s: not found\n", command);
             }
         }
     }
