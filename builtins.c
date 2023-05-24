@@ -19,7 +19,7 @@ char **val_of_arg(argument_exec *head)
 		temp = temp->next;
 		size++;
 	}
-	argv = malloc(size * sizeof(argument_exec));
+	argv = malloc((size + 1) * sizeof(argument_exec));
 	temp = head;
 	while (temp->next)
 	{
@@ -27,22 +27,24 @@ char **val_of_arg(argument_exec *head)
 		temp = temp->next;
 		i++;
 	}
+	argv[i] = NULL;
 	return (argv);
 }
 /**
  * list_of_arg - splits a string into substring and store them into a linked list
  *
  * @buf: The content to be split
+ * @delim: delimiters that will split the @buf
  *
  * Return: pointer to the head of a linked list
  */
-argument_exec *list_of_arg(char *buf)
+argument_exec *list_of_arg(char *buf, char *delim)
 {
 
 	char *str = NULL;
 	argument_exec *head = NULL, *temp = NULL, *new_node = NULL;
 
-	str = strtok(buf, " ");
+	str = strtok(buf, delim);
 	head = malloc(sizeof(argument_exec));
 	if (head == NULL)
 	{
@@ -55,7 +57,7 @@ argument_exec *list_of_arg(char *buf)
 	temp = head;
 	while (str)
 	{
-		str = strtok(NULL, " ");
+		str = strtok(NULL, delim);
 		new_node = malloc(sizeof(argument_exec));
 		if (new_node == NULL)
 		{
