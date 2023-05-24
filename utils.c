@@ -71,7 +71,7 @@ void execute_command(char *command)
 			wait(&status);
 			if (status != 0)
 			{
-				printf(stderr,"%s: command not found\n", command);
+				fprintf(stderr,"%s: command not found\n", command);
 			}
 		}
 	}
