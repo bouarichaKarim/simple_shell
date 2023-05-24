@@ -4,8 +4,9 @@
  * prompt - display the shell prompt.
  * Return: no return.
  */
+
 void prompt(void)
 {
-    if (isatty(STDIN_FILENO))
-        printf("#cisfun$ ");
+	if (isatty(STDIN_FILENO))
+		printf("#cisfun$ ");
 }
