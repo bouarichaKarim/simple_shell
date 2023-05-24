@@ -68,7 +68,7 @@ int file_exit(char **arg)
 
 /**
  * file_help - print help
- * @args: arguments
+ * @arg: arguments
  *
  * Return: 1 on success, 0 otherwise
  */
