@@ -8,6 +8,9 @@
 #include <sys/wait.h>
 #include <string.h>
 #include <ctype.h>
+#include <sys/stat.h>
+
+#define INITIAL_SIZE 10
 
 extern char **environ;
 
@@ -24,5 +27,4 @@ char *create_command_path(char *command, char *directory);
 
 void execute_builtin_command(char *command);
 
-
-#endif
+#endif /* SHELL_H */
