@@ -1,44 +1,67 @@
 #include "shell.h"
 
 /**
+ * command_fork - create a child process
+ *
+ * @buf: command string
+ * @env: an array of pointers to environment variables.
+ *
+ */
+void command_fork(char *buf, char **env)
+{
+	char **arg = NULL;
+	argument_exec *head = NULL;
+	char *cmd = NULL;
+
+	strtok(buf, "\n");
+	head = list_of_arg(buf, " ");
+	arg = val_of_arg(head);
+	cmd = check_file_exist(arg[0], env);
+	if (fork() == 0 && cmd)
+	{
+		if (execve(cmd, arg, env) == -1)
+		{
+			argv_free(head);
+			free(arg);
+			perror("./hsh");
+			exit(EXIT_FAILURE);
+		}
+		free(cmd);
+		argv_free(head);
+		free(arg);
+		exit(EXIT_SUCCESS);
+	}
+	else
+	{
+		wait(NULL);
+	}
+}
+/**
  * main - Entry point
  *
- * @argc: number of arguments passed into the program
- * @argv: pointer to an array of the strings
- * @env: an array of the pointers to the environment variables.
+ * @argc: the number of arguments passed to the program
+ * @argv: pointer to an array of strings
+ * @env: an array of pointers to environment variables.
  *
- * Return: always 0 when success
+ * Return: always 0 in success
  */
 int main(int argc __attribute__((unused)),
 char *argv[] __attribute__((unused)), char *env[])
 {
 	char *buf = NULL;
 	size_t size = 0;
+	ssize_t rd = 0;
 
 	if (isatty(STDIN_FILENO))
 	{
-		while (1)
+		while (rd != EOF)
 		{
-			if (fork() == 0)
+			write(STDIN_FILENO, "($) ", 4);
+			rd = getline(&buf, &size, stdin);
+			if (rd != EOF)
 			{
-				write(STDIN_FILENO, "($) ", 4);
-				if (getline(&buf, &size, stdin) == -1)
-				{
-					write(STDIN_FILENO, "\n", 1);
-					exit(EXIT_SUCCESS);
-				}
-				execute_shell_command(buf, env);
-				exit(EXIT_SUCCESS);
+				command_fork(buf, env);
 			}
-			else
-			{
-				if (wait(NULL) == -1)
-				{
-					perror("Child process");
-					exit(EXIT_FAILURE);
-				}
-			}
-
 		}
 
 	}
@@ -47,6 +70,5 @@ char *argv[] __attribute__((unused)), char *env[])
 		getline(&buf, &size, stdin);
 		execute_shell_command(buf, env);
 	}
-	free(buf);
 	return (0);
 }

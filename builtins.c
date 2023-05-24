@@ -31,14 +31,14 @@ char **val_of_arg(argument_exec *head)
 	return (argv);
 }
 /**
- * list_of_arg - splits a string into substring and store them into a linked list
+ * list_of_arg  - splits a string into substring and store them into a linked list
  *
  * @buf: The content to be split
  * @delim: delimiters that will split the @buf
  *
  * Return: pointer to the head of a linked list
  */
-argument_exec *list_of_arg(char *buf, char *delim)
+argument_exec *list_of_arg (char *buf, char *delim)
 {
 
 	char *str = NULL;

@@ -1,28 +1,22 @@
 #include "shell.h"
 /**
- * execute_shell_command - execute a command of the shell
+ * execute_shell_command - execute a command
  *
  * @cmd: command string
- * @env: pointer to pointer to an array of pointers to strings
- * call of the environment
+ * @env: an array of pointers to environment variables
  */
 void execute_shell_command(char *cmd, char **env)
 {
-        char **arg = NULL;
-        argument_exec *head = NULL;
+	char **arg = NULL;
+	argument_exec *head = NULL;
 
-        strtok(cmd, "\n");
-        head = list_of_arg(cmd);
-        arg = val_of_arg(head);
+	strtok(cmd, "\n");
+	head = list_of_arg(cmd, " ");
+	arg = val_of_arg(head);
 
-        if (execve(arg[0], arg, env) == -1)
-        {
-                argv_free(head);
-                free(arg);
-                perror("./hsh");
-                exit(EXIT_FAILURE);
-        }
-
-        argv_free(head);
-        free(arg);
+	if (execve(arg[0], arg, env) == -1)
+	{
+		perror("./hsh");
+		exit(EXIT_FAILURE);
+	}
 }
