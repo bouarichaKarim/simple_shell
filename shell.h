@@ -13,7 +13,7 @@
 #define INITIAL_SIZE 10
 
 extern char **environ;
-
+void execute_shell_command(char *command, char *program_name);
 void execute_command(char *command);
 void execute_builtin_command(char *command);
 void prompt(void);
