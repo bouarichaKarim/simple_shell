@@ -20,5 +20,6 @@ void free_arguments(char **arguments);
 
 char *get_command_path(char *command);
 char *create_command_path(char *command, char *directory);
+char *get_program_name(void);
 
 #endif

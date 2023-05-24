@@ -1,35 +1,5 @@
 #include "shell.h"
 
-void execute_exit_command(char *command)
-{
-    char *status_arg = command + 4;
-
-    while (*status_arg != '\0')
-    {
-        if (!isdigit(*status_arg))
-        {
-            int status = atoi(status_arg);
-            exit(status);
-        }
-        status_arg++;
-    }
-    exit(0);
-}
-
-void execute_shell_command(char *command)
-{
-    char *argv[] = {"/bin/sh", "-c", NULL, NULL};
-
-    argv[2] = command;
-    if (execve(argv[0], argv, NULL) == -1)
-    {
-        perror("Error executing command");
-        exit(EXIT_FAILURE);
-    }
-}
-
-#include "shell.h"
-
 void execute_command(char *command) {
     pid_t pid;
     int status;
