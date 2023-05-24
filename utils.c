@@ -90,7 +90,7 @@ void execute_command(char *command)
 			wait(&status);
 			if (status != 0)
 			{
-				fprintf(stderr, "%s: command not found\n", command);
+				
 			}
 		}
 	}
