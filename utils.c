@@ -24,7 +24,7 @@ void execute_command(char *command)
         argv[0] = command;
         argv[1] = NULL;
         execve(command, argv, NULL);
-        perror("execve");
+        fprintf(stderr, "%s: 1: %s: not found\n", PROGRAM_NAME, command);
         _exit(EXIT_FAILURE);
     }
     else
