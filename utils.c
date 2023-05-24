@@ -29,10 +29,22 @@ void execute_shell_command(char *command, char *program_name)
     }
     else if (pid == 0)
     {
-        execl("/bin/sh", "hsh", "-c", command, (char *)NULL);
+        char **argv = malloc(sizeof(char *) * 2);
+        if (argv == NULL)
+        {
+            perror("Memory allocation error");
+            exit(EXIT_FAILURE);
+        }
+
+        argv[0] = command;
+        argv[1] = NULL;
+
+        /* Check if the command exists */
+        if (access(command, X_OK) == 0)
+            execve(command, argv, environ);
 
         /* Print error message to stderr with program name */
-fprintf(stderr, "%s: %s: command not found\n", program_name, command);
+        fprintf(stderr, "%s: %s: command not found\n", program_name, command);
         exit(EXIT_FAILURE);
     }
     else
