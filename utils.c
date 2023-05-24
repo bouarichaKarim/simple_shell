@@ -68,7 +68,7 @@ void execute_command(char *command)
             char *argv[] = {"/bin/sh", "-c", NULL, NULL};
 
             argv[2] = command;
-            if (execve(argv[0], argv, NULL) == -1)
+            if (execve(argv[0], argv, environ) == -1)
             {
                 perror("Error executing command");
                 exit(EXIT_FAILURE);
