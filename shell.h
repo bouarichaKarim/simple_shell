@@ -3,6 +3,8 @@
 
 #include <stdlib.h>
 
+#define PROGRAM_NAME "hsh"
+
 void execute_command(char *command);
 
 char **tokenize_command(char *command, int *argc);
