@@ -20,7 +20,7 @@ int build_non_excute(char **arg);
 
 
 void path_set(char **args);
-
+char *read_ag(void);
 
 int file_cd(char **arg);
 int file_exit(char **arg);
