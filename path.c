@@ -25,20 +25,12 @@ char *get_command_path(char *command)
     {
         command_path = create_command_path(command, path);
 
-        if (command_path != NULL)
-        {
-            struct stat st;
-            if (stat(command_path, &st) == 0)
-            {
-                if (S_ISREG(st.st_mode) && (st.st_mode & S_IXUSR))
+                if (command_path != NULL && access(command_path, F_OK) == 0)
                 {
-                    return command_path;
+                        return (command_path);
                 }
-            }
-        }
-
-        path = strtok(NULL, ":");
-        free(command_path);
+                path = strtok(NULL, ":");
+                free(command_path);
     }
 
     fprintf(stderr, "%s: command not found\n", command);
