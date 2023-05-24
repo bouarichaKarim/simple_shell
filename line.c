@@ -1,9 +1,9 @@
 #include "shell.h"
 
 /**
- * read_line - read stdin
+ * read_line - read stdin.
  *
- * Return: pointer to sting
+ * Return: pointer to sting.
  */
 char *read_line(void)
 {
