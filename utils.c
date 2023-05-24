@@ -7,19 +7,19 @@
  */
 void execute_exit_command(char *command)
 {
-	char *status_arg = command + 4;
+    char *status_arg = command + 4;
 
-	while (*status_arg != '\0')
-	{
-		if (!isspace(*status_arg))
-		{
-			int status = atoi(status_arg);
+    while (*status_arg != '\0')
+    {
+        if (!isspace(*status_arg))
+        {
+            int status = atoi(status_arg);
 
-			exit(status);
-		}
-		status_arg++;
-	}
-	exit(0);
+            exit(status);
+        }
+        status_arg++;
+    }
+    exit(0);
 }
 
 /**
@@ -29,32 +29,37 @@ void execute_exit_command(char *command)
  */
 void execute_shell_command(char *command)
 {
-	char *argv[] = {"/bin/sh", "-c", NULL, NULL};
-	pid_t pid = fork();
+    char *argv[] = {"/bin/sh", "-c", NULL, NULL};
 
-	argv[2] = command;
+    argv[2] = command;
 
-	if (pid == -1)
-	{
-		perror("Error forking");
-		exit(EXIT_FAILURE);
-	}
-	else if (pid == 0)
-	{
-		execvp(argv[0], argv);
-		perror("Error executing command");
-		exit(EXIT_FAILURE);
-	}
-	else
-	{
-		int status;
+    pid_t pid = fork();
 
-		waitpid(pid, &status, 0);
-		if (WIFEXITED(status) && WEXITSTATUS(status) == 127)
-		{
-			fprintf(stderr, "%s: 1: %s: not found\n", argv[0], command);
-		}
-	}
+    if (pid == -1)
+    {
+        perror("Error forking");
+        exit(EXIT_FAILURE);
+    }
+    else if (pid == 0)
+    {
+        execvp(argv[0], argv);
+        perror("Error executing command");
+        exit(EXIT_FAILURE);
+    }
+    else
+    {
+        int status;
+
+        waitpid(pid, &status, 0);
+
+        if (WIFEXITED(status))
+        {
+            if (WEXITSTATUS(status) == 127)
+            {
+                fprintf(stderr, "%s: 1: %s: not found\n", argv[0], command);
+            }
+        }
+    }
 }
 
 /**
@@ -65,32 +70,13 @@ void execute_shell_command(char *command)
  */
 void execute_command(char *command)
 {
-	if (strncmp(command, "exit", 4) == 0)
-	{
-		execute_exit_command(command);
-	}
-	else
-	{
-		pid_t pid;
-		int status;
-
-		pid = fork();
-		if (pid == -1)
-		{
-			perror("Error forking");
-			exit(EXIT_FAILURE);
-		}
-		else if (pid == 0)
-		{
-			execute_shell_command(command);
-		}
-		else
-		{
-			wait(&status);
-			if (status != 0)
-			{
-				fprintf(stderr, "%s: command not found\n", command);
-			}
-		}
-	}
+    if (strncmp(command, "exit", 4) == 0)
+    {
+        execute_exit_command(command);
+    }
+    else
+    {
+        execute_shell_command(command);
+    }
 }
+
