@@ -1,5 +1,5 @@
-#ifndef SIMPLE_SHELL
-#define SIMPLE_SHELL
+#ifndef SHELL_H
+#define SHELL_H
 #include <stdio.h>
 #include<sys/wait.h>
 #include <string.h>
