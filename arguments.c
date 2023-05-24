@@ -23,7 +23,7 @@ char **parse_arguments(char *line)
 
         if (arg_count >= arg_size)
         {
-            arg_size *= 2;
+            arg_size += 2;
             arguments = realloc(arguments, sizeof(char *) * arg_size);
         }
 
