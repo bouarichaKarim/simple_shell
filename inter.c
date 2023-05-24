@@ -1,7 +1,7 @@
 #include "shell.h"
 
 /**
- * interactive - takes command directly from shell
+ * interactive - takes command directly from shell.
  *
  * Return: void
  */
