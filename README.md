@@ -37,6 +37,7 @@ Here are some examples of using the Simple Shell:
 $ ./simple_shell
 ```
 $ :) ls
+```
 $ ls
 README.md shell.c shell.h
 $ :) pwd
