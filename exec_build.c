@@ -21,7 +21,6 @@ int build_excute(char **arg)
 
 	if (arg[0] == NULL)
 	{
-		/* empty command was entered */
 		return (-1);
 	}
 	/* find if the command is a builtin */
