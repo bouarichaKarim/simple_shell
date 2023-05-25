@@ -53,12 +53,10 @@ int env_file(char **arg)
  */
 int file_exit(char **arg)
 {
-	/* exit with status */
 	if (arg[1])
 	{
 		return (atoi(arg[1]));
 	}
-	/* exit success */
 	else
 	{
 		return (0);
