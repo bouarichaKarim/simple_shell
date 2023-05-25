@@ -49,7 +49,7 @@ int build_non_excute(char **arg)
         pid = fork();
         if (pid == 0)
         {
-                path_set(arg); // Set the path of the command
+                path_set(arg);
                 if (access(arg[0], F_OK) == 0)
                 {
                         if (execve(arg[0], arg, NULL) == -1)
@@ -72,6 +72,6 @@ int build_non_excute(char **arg)
         {
                 wait(&status);
         }
-        return (-1);
+      return(-1);
 
 }
