@@ -14,7 +14,7 @@ This shell was developed as a team project for the ALX Africa Software Engineeri
 
 ## Getting Started
 
-To get started with the Simple Shell, follow these steps:
+To get started with the Shell, follow these steps:
 
 1. Clone this repository to your local machine.
 2. Compile the shell using the provided Makefile by running the command `make` in the repository's directory.
