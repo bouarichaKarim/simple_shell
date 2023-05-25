@@ -54,13 +54,13 @@ int env_file(char **arg)
 int file_exit(char **arg)
 {
 
-	if (arg[1])
-	{
-		return (atoi(arg[1]));
-	}
-	else if (arg[1] == NULL)
+	if (arg[1] == NULL)
 	{
 		return (0);
+	}
+	else
+	{
+		return (atoi(arg[1]));
 	}
 }
 
