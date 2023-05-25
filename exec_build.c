@@ -58,7 +58,6 @@ int build_non_excute(char **arg)
 	}
 	else if (pid < 0)
 	{
-		/* Error forking */
 		perror("Error in new_process: forking");
 	}
 	else
