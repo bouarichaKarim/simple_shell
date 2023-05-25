@@ -63,9 +63,9 @@ $ :) pwd
 $ pwd
 /home/user
 ```
+```
 $ :) exit
 $
-```
 
 
 ## Authors
