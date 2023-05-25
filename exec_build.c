@@ -23,7 +23,6 @@ int build_excute(char **arg)
 	{
 		return (-1);
 	}
-	/* find if the command is a builtin */
 	for (; j < sizeof(builtin_functions) / sizeof(char *); j++)
 	{
 /*
