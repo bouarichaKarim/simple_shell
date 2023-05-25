@@ -43,26 +43,35 @@ int build_excute(char **arg)
 
 int build_non_excute(char **arg)
 {
-	pid_t pid;
-	int status;
+	 pid_t pid;
+        int status;
 
-	pid = fork();
-	if (pid == 0)
-	{
-		path_set(arg);
-		if (execve(arg[0], arg, NULL) == -1)
-		{
-			perror("Error in new_process: child process");
-		}
-		exit(EXIT_FAILURE);
-	}
-	else if (pid < 0)
-	{
-		perror("Error in new_process: forking");
-	}
-	else
-	{
-		wait(&status);
-	}
-	return (-1);
+        pid = fork();
+        if (pid == 0)
+        {
+                path_set(arg); // Set the path of the command
+                if (access(arg[0], F_OK) == 0)
+                {
+                        if (execve(arg[0], arg, NULL) == -1)
+                        {
+                                perror("Error in new_process: child process");
+                        }
+                }
+                else
+                {
+                        fprintf(stderr, "%s: command not found\n", arg[0]);
+                        exit(EXIT_FAILURE);
+                }
+                exit(EXIT_FAILURE);
+        }
+        else if (pid < 0)
+        {
+                perror("Error in new_process: forking");
+        }
+        else
+        {
+                wait(&status);
+        }
+        return (-1);
+
 }
