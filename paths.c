@@ -24,7 +24,7 @@ void path_set(char **args)
 		snprintf(cmd_path, sizeof(cmd_path), "%s/%s", dir, args[0]);
 		if (access(cmd_path, X_OK) == 0)
 		{
-			args[0] = cmd_path;
+			args[0] = strdup(cmd_path);
 			break;
 		}
 		dir = strtok(NULL, ":");
