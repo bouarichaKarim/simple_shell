@@ -46,8 +46,8 @@ int env_file(char **arg)
 
 
 /**
- * file_exit - exit terminal
- * @arg: empty
+ * file_exit - exit terminal.
+ * @arg: empty.
  *
  * Return: 0 to terminate the process
  */
