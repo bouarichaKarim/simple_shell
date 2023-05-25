@@ -24,10 +24,10 @@ int file_cd(char **arg)
 
 
 /**
- * env_file - print enviroment variables
- * @arg: argument
+ * env_file - print enviroment variables.
+ * @arg: argument.
  *
- * Return: 1 if success, 0 if not.
+ * Return: 1 if success, 0 if not
  */
 
 int env_file(char **arg)
