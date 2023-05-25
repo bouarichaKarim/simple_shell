@@ -66,7 +66,6 @@ $ pwd
 $ :) exit
 $
 ```
-```
 
 
 ## Authors
