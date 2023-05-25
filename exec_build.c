@@ -1,10 +1,10 @@
 #include "shell.h"
 
 /**
- * build_excute - excute buildin functions
- * @arg: commands
+ * build_excute - excute buildin functions.
+ * @arg: commands.
  *
- * Return: 1 if sucess, 0 of not
+ * Return: 1 if sucess, 0 of not.
  */
 
 int build_excute(char **arg)
