@@ -62,7 +62,6 @@ int build_non_excute(char **arg)
 	}
 	else
 	{
-		/* Parent process */
 		wait(&status);
 	}
 	return (-1);
