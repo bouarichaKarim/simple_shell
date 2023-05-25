@@ -68,7 +68,7 @@ int file_exit(char **arg)
 	{
 		printf("exit: too many arguments\n");
 		return (-1);
-	 }
+	}
 }
 
 
