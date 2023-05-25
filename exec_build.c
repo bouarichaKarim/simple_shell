@@ -30,7 +30,6 @@ int build_excute(char **arg)
 			return ((*builtin_func_code[j])(arg));
 		}
 	}
-	/* create a new process */
 	return (build_non_excute(arg));
 }
 
