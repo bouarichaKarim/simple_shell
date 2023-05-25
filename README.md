@@ -49,3 +49,15 @@ $ pwd
 $ :) exit
 $
 
+
+
+## Authors
+
+This Simple Shell was developed as a team project by the following ALX Africa Software Engineering Program students:
+
+- Bouaricha Karim
+- Bouaricha Ayman
+
+## Acknowledgments
+
+We would like to thank our mentors and instructors at ALX Africa for their guidance and support throughout the development of this project.
