@@ -1,7 +1,7 @@
 #include "shell.h"
 
 /**
- * file_cd - change directory
+ * file_cd - change directory.
  * @arg: directory we want to change to
  *
  * Return: 1 one success, 0 otherwise.
