@@ -35,10 +35,10 @@ int build_excute(char **arg)
 
 
 /**
- * build_non_excute - excute the non buildin command
- * @arg: the command line entered
+ * build_non_excute - excute the non buildin command.
+ * @arg: the command line entered.
  *
- * Return: 1 if success, 0 if not.
+ * Return: 1 if success, 0 if not
  */
 
 int build_non_excute(char **arg)
@@ -49,7 +49,6 @@ int build_non_excute(char **arg)
 	pid = fork();
 	if (pid == 0)
 	{
-		/* Child process */
 		path_set(arg);
 		if (execve(arg[0], arg, NULL) == -1)
 		{
