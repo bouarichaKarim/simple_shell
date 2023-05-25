@@ -41,8 +41,6 @@ $ :) ls
 ```
 ```
 $ ls
-```
-```
 README.md shell.c shell.h
 ```
 ```
@@ -50,8 +48,6 @@ $ :) pwd
 ```
 ```
 $ pwd
-```
-```
 /home/user/simple_shell
 ```
 ```
@@ -62,11 +58,14 @@ $ cd ..
 ```
 ```
 $ :) pwd
+```
+```
 $ pwd
 /home/user
+```
 $ :) exit
 $
-
+```
 
 
 ## Authors
