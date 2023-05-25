@@ -60,7 +60,8 @@ int file_exit(char **arg)
 	}
 	else
 	{
-		return (atoi(arg[1]));
+		printf("exit: too many arguments\n");
+		return (-1);
 	}
 }
 
